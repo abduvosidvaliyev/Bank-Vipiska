@@ -84,6 +84,33 @@ const FormPage = () => {
 
 
   const SubmitData = (data: ItemFormValues) => {
+    // 🛑 VALIDATSIYA: Bo'sh joylar qolib ketmasligini tekshiramiz
+    if (!data.date) {
+      alert("Iltimos, hujjat sanasini kiriting!");
+      return;
+    }
+    if (data.purchase_type.id === 0) {
+      alert("Iltimos, hujjat turini tanlang!");
+      return;
+    }
+    if (data.items.length === 0) {
+      alert("Iltimos, jadvalga kamida bitta qator (element) qo'shing!");
+      return;
+    }
+
+    // Jadvaldagi har bir qatorni tekshirib chiqamiz
+    for (let i = 0; i < data.items.length; i++) {
+      const row = data.items[i];
+      if (row.counterparty.id === 0) {
+        alert(`Iltimos, ${i + 1}-qatorda kontragentni tanlang!`);
+        return;
+      }
+      if (!row.amount || Number(row.amount) <= 0) {
+        alert(`Iltimos, ${i + 1}-qatorda to'g'ri summa (0 dan katta) kiriting!`);
+        return;
+      }
+    }
+
     const finalData: Statement = {
       ...data,
       id: currentData?.id || Date.now(),

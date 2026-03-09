@@ -94,7 +94,7 @@ const Dashboard = () => {
                 >
                   <td className="text-start py-5 px-3">{st.number}</td>
                   <td className="text-start">
-                    {st.date ? st.date.split("T")[0].split("-").reverse().join(".") : ""} | {st.date?.includes("T") ? st.date.split("T")[1].slice(0, 5) : "00:00"}
+                    {st.date ? st.date.split("T")[0].split("-").reverse().join(".") : ""}
                   </td>
                   <td className="text-start">{st.employee_name}</td>
                   <td className="text-end font-mono text-green-600">
